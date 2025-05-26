@@ -1,0 +1,8 @@
+# https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+$dlurl = "https://awscli.amazonaws.com/AWSCLIV2.msi"
+$installerPath = Join-Path $env:TEMP (Split-Path $dlurl -Leaf)
+$ProgressPreference = 'SilentlyContinue'
+Invoke-WebRequest $dlurl -OutFile $installerPath
+Start-Process -FilePath msiexec -Args "/i $installerPath /passive" -Verb RunAs -Wait
+Remove-Item $installerPath
+$env:Path += ";C:\Program Files\Amazon\AWSCLIV2"
